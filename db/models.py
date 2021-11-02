@@ -27,7 +27,8 @@ class Reservation(Base):
     __tablename__ = 'reservation'
     idReservation = Column(Integer, primary_key=True)
     title = Column(String(45))
-    date = Column(Date)
+    start_of_reservation = Column(Date)
+    end_of_reservation = Column(Date)
     User_idUser = Column(Integer, ForeignKey('user.idUser'))
     Audience_idAudience = Column(Integer, ForeignKey('audience.idAudience'))
 
@@ -35,7 +36,7 @@ class Reservation(Base):
     audience = relationship("Audience")
 
     def __repr__(self):
-        return f"{self.idReservation}, {self.title}, {self.date}, {self.User_idUser}, {self.Audience_idAudience}"
+        return f"{self.idReservation}, {self.title}, {self.start_of_reservation}, {self.end_of_reservation}, {self.User_idUser}, {self.Audience_idAudience}"
 
 
 class Audience(Base):
@@ -44,12 +45,9 @@ class Audience(Base):
     number = Column(Integer)
     amount_of_places = Column(Integer)
     status = Column(Boolean)
-    reservation_date = Column(Date)
 
     def __repr__(self):
-        return f"{self.idAudience}, {self.number}, {self.amount_of_places}, {self.status}, {self.reservation_date}"
+        return f"{self.idAudience}, {self.number}, {self.amount_of_places}, {self.status}"
 
 
 
-
-# Base.metadata.create_all(engine)
