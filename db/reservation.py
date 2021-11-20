@@ -176,7 +176,7 @@ def update_reservation(reservationId):
     if 'from_date' in data.keys():
         db_reservation.from_date = data['from_date']
     if 'to_date' in data.keys():
-        db_reservation.from_date = data['to_date']
+        db_reservation.to_date = data['to_date']
 
     # Save changes
     session.commit()
