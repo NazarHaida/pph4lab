@@ -1,11 +1,11 @@
-from sqlalchemy import Column, Boolean, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Boolean, Integer, String, DateTime, ForeignKey
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine("mysql+mysqlconnector://root:boborffrff@localhost/lab6model", echo=True)
+engine = create_engine("mysql+mysqlconnector://root:My1566@localhost/lab7", echo=True)
 
 Base = declarative_base()
 metadata = Base.metadata
@@ -16,7 +16,7 @@ class User(Base):
     name = Column(String(45))
     surname = Column(String(45))
     username = Column(String(45))
-    password = Column(String(45))
+    password = Column(String(200))
 
     def __repr__(self):
         return f"{self.idUser}, {self.name}, {self.surname}, {self.username}, {self.password}"
@@ -27,7 +27,8 @@ class Reservation(Base):
     __tablename__ = 'reservation'
     idReservation = Column(Integer, primary_key=True)
     title = Column(String(45))
-    date = Column(Date)
+    from_date = Column(DateTime)
+    to_date = Column(DateTime)
     User_idUser = Column(Integer, ForeignKey('user.idUser'))
     Audience_idAudience = Column(Integer, ForeignKey('audience.idAudience'))
 
@@ -44,7 +45,7 @@ class Audience(Base):
     number = Column(Integer)
     amount_of_places = Column(Integer)
     status = Column(Boolean)
-    reservation_date = Column(Date)
+
 
     def __repr__(self):
         return f"{self.idAudience}, {self.number}, {self.amount_of_places}, {self.status}, {self.reservation_date}"

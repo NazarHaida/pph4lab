@@ -8,6 +8,7 @@ authors = ["oleh17v <burik15v@gmail.com>"]
 python = "^3.7"
 Flask = "^2.0.2"
 waitress = "^2.0.0"
+SQLAlchemy = "^1.4.27"
 
 [tool.poetry.dev-dependencies]
 
