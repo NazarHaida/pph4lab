@@ -153,7 +153,7 @@ def update_reservation(reservationId):
         if 'audience_id' in data.keys():
             audience = session.query(Audience).filter_by(idAudience=data['audience_id']).first()
         else:
-            audience = session.query(Audience).filter_by(Audience_idAudience=db_reservation.audience_id).first()
+            audience = session.query(Audience).filter_by(idAudience=db_reservation.Audience_idAudience).first()
         if not audience.status:
             return Response(status=400, response="Audience is not available now.")
         reservations = session.query(Reservation).filter_by(Audience_idAudience=audience.idAudience)
