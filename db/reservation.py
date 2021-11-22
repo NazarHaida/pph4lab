@@ -211,6 +211,9 @@ def delete_reservation(reservationId):
 @reservation.route('/api/v1/reservation/User_idUser/<userId>', methods=['GET'])
 def get_reservations_by_userId(userId):
     # Get all user's reservations from db
+    user = session.query(User).filter_by(idUser=userId).first()
+    if not user:
+        return Response(status=404, response='User with such id was not found.')
     reservations = session.query(Reservation).filter_by(User_idUser=userId)
 
     # Return all reservations
