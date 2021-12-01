@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f64caabbbe33
+Revision ID: 17ee00ed83a3
 Revises: 
-Create Date: 2021-10-24 14:32:41.220053
+Create Date: 2021-11-22 20:14:08.748948
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f64caabbbe33'
+revision = '17ee00ed83a3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,6 @@ def upgrade():
     sa.Column('number', sa.Integer(), nullable=True),
     sa.Column('amount_of_places', sa.Integer(), nullable=True),
     sa.Column('status', sa.Boolean(), nullable=True),
-    sa.Column('reservation_date', sa.Date(), nullable=True),
     sa.PrimaryKeyConstraint('idAudience')
     )
     op.create_table('user',
@@ -31,13 +30,14 @@ def upgrade():
     sa.Column('name', sa.String(length=45), nullable=True),
     sa.Column('surname', sa.String(length=45), nullable=True),
     sa.Column('username', sa.String(length=45), nullable=True),
-    sa.Column('password', sa.String(length=45), nullable=True),
+    sa.Column('password', sa.String(length=200), nullable=True),
     sa.PrimaryKeyConstraint('idUser')
     )
     op.create_table('reservation',
     sa.Column('idReservation', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=45), nullable=True),
-    sa.Column('date', sa.Date(), nullable=True),
+    sa.Column('from_date', sa.DateTime(), nullable=True),
+    sa.Column('to_date', sa.DateTime(), nullable=True),
     sa.Column('User_idUser', sa.Integer(), nullable=True),
     sa.Column('Audience_idAudience', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['Audience_idAudience'], ['audience.idAudience'], ),

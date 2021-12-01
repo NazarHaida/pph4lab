@@ -3,14 +3,15 @@ from marshmallow import ValidationError
 from db.models import Audience
 from db.queries import Session
 from db.valid import AudienceSchema
+from db.user import auth
 
 audience = Blueprint('audience', __name__)
 
 session = Session()
 
-
 # Create new audience
 @audience.route('/api/v1/audience', methods=['POST'])
+@auth.login_required
 def create_audience():
     # Get data from request body
     data = request.get_json()
@@ -35,9 +36,9 @@ def create_audience():
 
     return Response(response='New audience was successfully created!')
 
-
 # Get all audiences
 @audience.route('/api/v1/audience', methods=['GET'])
+@auth.login_required
 def get_audiences():
     # Get all audiences from db
     audiences = session.query(Audience)
@@ -51,9 +52,9 @@ def get_audiences():
                        'status': a.status})
     return jsonify({"audiences": output})
 
-
 # Get audience by id
 @audience.route('/api/v1/audience/<audienceId>', methods=['GET'])
+@auth.login_required
 def get_audience(audienceId):
     # Check if audience exists
     db_audience = session.query(Audience).filter_by(idAudience=audienceId).first()
@@ -69,9 +70,9 @@ def get_audience(audienceId):
     }
     return jsonify({"audience": audience_data})
 
-
 # Update audience by id
 @audience.route('/api/v1/audience/<audienceId>', methods=['PUT'])
+@auth.login_required
 def update_audience(audienceId):
     # Get data from request body
     data = request.get_json()
@@ -111,9 +112,9 @@ def update_audience(audienceId):
     }
     return jsonify({"audience": audience_data})
 
-
 # Delete audience by id
 @audience.route('/api/v1/audience/<audienceId>', methods=['DELETE'])
+@auth.login_required
 def delete_audience(audienceId):
     # Check if audience exists
     db_audience = session.query(Audience).filter_by(idAudience=audienceId).first()

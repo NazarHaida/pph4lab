@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine("mysql+mysqlconnector://root:My1566@localhost/lab7", echo=True)
+engine = create_engine("mysql+mysqlconnector://root:MyZno26112003@localhost:3306/lab8dtbs", echo=True)
 
 Base = declarative_base()
 metadata = Base.metadata
@@ -21,8 +21,6 @@ class User(Base):
     def __repr__(self):
         return f"{self.idUser}, {self.name}, {self.surname}, {self.username}, {self.password}"
 
-
-
 class Reservation(Base):
     __tablename__ = 'reservation'
     idReservation = Column(Integer, primary_key=True)
@@ -37,7 +35,6 @@ class Reservation(Base):
 
     def __repr__(self):
         return f"{self.idReservation}, {self.title}, {self.date}, {self.User_idUser}, {self.Audience_idAudience}"
-
 
 class Audience(Base):
     __tablename__ = "audience"

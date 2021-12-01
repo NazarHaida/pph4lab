@@ -1,10 +1,9 @@
 from flask import Flask
-from waitress import serve
+
 from db.aut import auth
 from db.user import user
 from db.audience import audience
 from db.reservation import reservation
-
 
 app = Flask(__name__)
 app.register_blueprint(auth)
